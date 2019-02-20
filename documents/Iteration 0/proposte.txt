@@ -1,0 +1,5 @@
+PROPOSTE:
+	- PostgreSQL per maggior compatibilità con ricerca fuzzy
+	- Algoritmo per ricerca testuale: algoritmo di ricerca fuzzy
+	- Algoritmo per visualizzazione libri consigliati: k-means mixato con altri parametri
+	- Titolo non più identificato da ISBN, ma da un codice. Così da avere più ISBN per libro
