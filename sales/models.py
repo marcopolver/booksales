@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class GenericUser(models.Model):
@@ -30,7 +31,7 @@ class Student(GenericUser):
     )
 
     major = models.CharField(max_length=10, choices=MAJORS_NAMES)
-    year_of_study = models.IntegerField(max_length=1, choices=range(1, 5), default=1)
+    year_of_study = models.IntegerField(max_length=1, validators=[MaxValueValidator(5), MinValueValidator(1)], default=1)
     sold_books_number = models.IntegerField(default=0)
     bought_books_number = models.IntegerField(default=0)
     reports_number = models.IntegerField(default=0)
@@ -46,16 +47,40 @@ class Administrator(GenericUser):
     def __str__(self):
         return self.personal_email
 
+class Content(models.Model):
+
+    C_TYPES = (
+        ('t','title'),
+        ('tr', 'title_review'),
+        ('ba', 'book_ad'),
+        ('ur', 'user_review')
+    )
+    content_type = models.CharField(max_length=2, choices=C_TYPES)
+
 class Title(models.Model):
     name = models.CharField(max_length=10)
     cover_image = models.ImageField(upload_to='images/title_covers', height_field=None, width_field=None, max_length=100, null=True)
     description = models.TextField(max_length=500)
     #TODO: Content primary key
-    content_id =
-    description_user_id = models.ForeignKey(GenericUser, on_delete=models.SET_NULL(), null=True)
+    content_id = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='contenuto')
+    description_user_id = models.ForeignKey(GenericUser, on_delete=models.SET_NULL, null=True, related_name='descrizioni')
     creation_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True, auto_now_add=True)
 
+    CATEGORIES = (
+        ('FIS', 'Fisica'),
+        ('MAT', 'Matematica'),
+        ('INF', 'Informatica'),
+        ('MEC', 'Meccanica'),
+        ('EN', 'Elettronica'),
+        ('ECO', 'Economia'),
+        ('AUT', 'Automazione'),
+        ('STA', 'Statistica')
+    )
+    category = models.CharField(max_length=3, choices=CATEGORIES)
+
     def __str__(self):
         return self.name
+
+
 
