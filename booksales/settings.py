@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'sales.GenericUser'
+AUTH_USER_MODEL = 'sales.Student'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
