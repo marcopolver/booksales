@@ -105,6 +105,8 @@ class BookAd(models.Model):
     last_edit_datetime = models.DateTimeField(auto_now=True)
     buyer_id = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, related_name='acquisti')
     purchase_confirmation = models.BooleanField(null=True)
+    #TODO: ImageField, una foto del libro è necessaria
+    #TODO: Modifica -> i dati relativi all'acquisto non vanno in BookAd ma in un nuovo model Transaction
 
     #NB: Ritorna titolo, non è univoco
     def __str__(self):

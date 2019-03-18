@@ -1,5 +1,9 @@
-PROPOSTE:
-	- PostgreSQL per maggior compatibilità con ricerca fuzzy
-	- Algoritmo per ricerca testuale: algoritmo di ricerca fuzzy
-	- Algoritmo per visualizzazione libri consigliati: k-means mixato con altri parametri
-	- Titolo non più identificato da ISBN, ma da un codice. Così da avere più ISBN per libro
+IDEE:
+	- Algoritmo di clustering preso da internet. 
+	- Implementazione da modificare per usare metodo del gomito.
+	- Wishlist: +1, Titoli d'interesse: +5. Se un libro dei titoli d'interesse ha anche
+	  un'instanza nella wishlist, quest'ultima non viene contata.
+	- IPOTESI: mettere in automatico un titolo tra i titoli d'interesse se uno studente
+	  mette almeno 'n' libri legati a quel titolo nella wishlist.
+	- Prendere i libri seguiti (wishlist o titoli d'interesse) dagli altri studenti dello
+   	  stesso cluster dello studente che ha effettuato l'accesso.

@@ -46,9 +46,8 @@
 	Esempio: "Fondamenti di meccanica per l'ingegneria" è un titolo, mentre per libro si potrebbe intendere una sua qualsiasi realizzazione fisica messa in vendita da un utente. \\
 	E' inoltre necessario introdurre la classificazione degli utenti del servizio:
 	\begin{itemize}
-		\item Studente: si tratta di uno studente iscritto presso l'Università degli Studi di Bergamo che intende usufruire del servizio.
-		\item Amministratore: si tratta di un soggetto che amministrana il sito web e che potrebbe essere esterno all'università.
-		\item Utente generico: include studenti ed amministratori.
+		\item Studente: si tratta di uno studente iscritto presso l'Università degli Studi di Bergamo che intende usufruire del servizio. All'interno del documento verrà anche chiamato \textit{utente}.
+		\item Amministratore: si tratta di un soggetto che amministra il sito web e che potrebbe essere esterno all'università.
 	\end{itemize}
 	Questa classificazione risulta necessaria per comprendere i requisiti elencati in seguito, i quali possono riferirsi a classi d'utenti diverse:\\
 	
@@ -70,7 +69,7 @@
 		\end{itemize}
 		A richiesta di registrazione effettuata, il sistema deve verificare che nessuno studente si sia già registrato con l'indirizzo email universitario e lo username inseriti ed inviare all'indirizzo email fornito una email contenente una password generata casualmente e che dovrà essere utilizzata dallo studente per confermare la propria registrazione entro 3 giorni, oltre ai quali la sua registrazione verrà annullata.\\ \hline
 		AC2&Accesso studente&Accesso al servizio da parte di uno studente precedentemente registrato tramite inserimento di username e password.\\ \hline
-		AC3&Registrazione nuovo amministratore&Registrazione di un nuovo amministratore da parte di un utente che ricopre già tale ruolo. Per l'aggiunta di un amministratore sarà necessario fornire i seguenti dati necessari:
+		AC3&Registrazione nuovo amministratore&Registrazione di un nuovo amministratore da parte di un soggetto che ricopre già tale ruolo. Per l'aggiunta di un amministratore sarà necessario fornire i seguenti dati necessari:
 		\begin{itemize}
 			\item Nome e cognome
 			\item Mail personale
@@ -81,9 +80,8 @@
 
 	\begin{tabular}{cp{3cm}p{9cm}p{1cm}}
 		Codice requisito&Nome&Descrizione\\ \hline
-		RI1&Ricerca libro&Ricerca da parte di un utente generico di un libro di testo in vendita con filtraggio basato su:
+		RI1&Ricerca libro&Ricerca da parte di uno studente di un libro di testo in vendita con filtraggio basato su:
 		\begin{itemize}
-			\item Corso per cui un libro è consigliato
 			\item Titolo
 			\item ISBN
 			\item Prezzo
@@ -135,10 +133,10 @@
 			\item Titolo
 			\item Autore/i
 			\item ISBN
-			\item Corso per il quale il testo è consigliato
+			\item Categoria (informatica, meccanica, letteratura latina, economia aziendale, ...)
 		\end{itemize}
-		Il sistema verifica che nessun altro titolo con il medesimo ISBN sia stato inserito in precedenza e, se ciò non è avvenuto, inserisce il titolo nel database e crea automaticamente una pagina del titolo contenente le informazioni fornite. Se invece si tratta di una nuova edizione di un determinato titolo già presente nel database, l'ISBN della nuova versione viene aggiunto alla lista degli ISBN corrispondenti al titolo. Informazioni aggiuntive potranno essere aggiunte dagli studenti come specificato in \textit{T2}.\\ \hline
-		U1&Ricerca studente&Ricerca di studenti da parte di un utente generico con filtraggio basato su:
+		Il sistema verifica che nessun altro titolo con il medesimo ISBN sia stato inserito in precedenza e, se ciò non è avvenuto, inserisce il titolo nel database e crea automaticamente una pagina del titolo contenente le informazioni fornite.\\ \hline
+		U1&Ricerca studente&Ricerca di studenti da parte di un utente con filtraggio basato su:
 		\begin{itemize}
 			\item Username
 			\item Nome e cognome
@@ -193,18 +191,6 @@
 		Codice requisito&Nome&Descrizione\\ \hline
 		RE1&Recensione venditore&Inserimento da parte di un utente acquirente di una recensione del venditore di uno specifico libro. Questo dovrà risultare possibile soltanto dopo la conferma dell'acquisto di un libro. La recensione dovrà contenere un valore intero compreso tra 0 e 5 (indicato tramite stelle) ed un commento.\\ \hline
 		RE2&Recensione acquirente&Inserimento da parte di un utente venditore di una recensione dell'acquirente di uno specifico libro. Questo dovrà risultare possibile soltanto dopo la conferma dell'acquisto di un libro. La recensione dovrà contenere un valore intero compreso tra 0 e 5 (indicato tramite stelle) ed un commento.\\ \hline
-		C1&Ricerca corso&Ricerca da parte dell'utente della pagina relativa ad un corso. Tale pagina deve contenere informazioni relative a:
-		\begin{itemize}
-			\item Corsi di laurea con relativo anno per i quali il corso è previsto.
-			\item Titoli consigliati per il corso.
-		\end{itemize}\\ \hline
-		C2&Creazione pagina corso&Creazione da parte di un amministratore di una pagina relativa ad un corso. Devono essere fornite le seguenti informazioni:
-		\begin{itemize}
-			\item Nome del corso universitario.
-			\item Link alla pagina web del corso.
-			\item Elenco dei corsi di laurea e degli anni di corso legati a tale corso universitario.
-		\end{itemize}
-		Il sistema deve controllare che un corso con lo stesso nome non sia già stato inserito, dopodiché aggiunge il corso al database. \\ \hline
 		RE3&Recensione titolo&Inserimento da parte di un utente qualsiasi di una recensione di un qualsiasi titolo. La recensione dovrà contenere un valore intero compreso tra 0 e 5 (indicato tramite stelle) ed un commento.\\ \hline
 		S1&Segnalazione contenuto&Qualsiasi contenuto (inserzione, pagina utente, pagina di un titolo, recensione) deve risultare segnalabile da un qualsiasi utente. Durante la segnalazione di un contenuto, l'utente segnalatore deve specificare con un commento il motivo della segnalazione e specificare tramite selezione quale delle regole etiche del servizio è stata potenzialmente violata.\\ \hline
 		S2&Gestione segnalazioni&Gli amministratori devono avere accesso ad una pagina contenente una lista di segnalazioni dalla quale poter analizzare ogni singolo caso e decidere se eliminare un determinato contenuto segnalato o ritenere la segnalazione irrilevante. In caso di segnalazione accettata, l'utente autore del contenuto eliminato deve essere notificato dell'eliminazione del contenuto via email. A fronte di 3 segnalazioni nei confronti del medesimo utente accettate, l'utente in questione deve essere sospeso per 3 mesi.\\ \hline
@@ -214,11 +200,8 @@
 	\begin{tabular}{cp{3cm}p{9cm}p{1cm}}
 		Codice requisito&Nome&Descrizione\\ \hline
 		AS1&Richiesta di assistenza&Richiesta di assistenza effettuata da un utente. Ogni richiesta deve includere un titolo e una descrizione del problema. Ogni richiesta viene gestita come un ticket avente un codice univoco.\\ \hline
-		AS2&Gestione richiesta d'assistenza&Ogni amministratore deve avere la possibilità di rispondere ad una richiesta d'assistenza. Nel momento in cui una richiesta viene gestita da uno specifico amministratore, gli altri amministratori non devono più avere la possibilità di gestirla. Successivamente alla gestione di una richiesta d'assistenza, la quale consiste in una risposta testuale da parte dell'amministratore, l'autore della richiesta viene notificato via email dell'avvenuta gestione della richiesta: l'email deve contenere il testo della risposta e un link alla pagina del ticket, presso la quale l'utente può continuare la conversazione con l'amministratore.
+		AS2&Gestione richiesta d'assistenza&Ogni amministratore deve avere la possibilità di rispondere ad una richiesta d'assistenza. Nel momento in cui una richiesta viene gestita da uno specifico amministratore, gli altri amministratori non devono più avere la possibilità di gestirla. Successivamente alla gestione di una richiesta d'assistenza, la quale consiste in una risposta testuale da parte dell'amministratore, l'autore della richiesta viene notificato via email dell'avvenuta gestione della richiesta: l'email deve contenere il testo della risposta.
 	\end{tabular}
-	\newline
-	\newline
-	Ogni requisito che consenta l'inserimento di testo da parte di un utente deve prevedere un controllo automatico sul testo stesso, per evitare la pubblicazione di termini scurrili. In caso di presenza di parole offensive, il testo in questione non deve essere pubblicato e il sistema deve richiedere all'utente di inserire un testo privo di tali termini.
 	
 	\section{Casi d'uso}
 	Di seguito sono riportati i diagrammi dei casi d'uso relativo ad amministratori, studenti ed utenti generici.
@@ -234,149 +217,6 @@
 		\includegraphics[height=19cm, width=17cm, keepaspectratio]{st_uc}
 		\caption{Casi d'uso per studente}
 	\end{figure}
-
-	\subsection{UCG1: Ricerca libro}
-	\begin{tabular}{lp{0.8\textwidth}}
-		\textbf{Descrizione}&Un utente generico effettua la ricerca di un libro tra gli annunci pubblicati.\\
-		\\
-		\textbf{Requisiti coperti}&RI1\\
-		\\
-		\textbf{Attori coinvolti}&Utente generico\\
-		\\
-		\textbf{Precondizioni}&L'utente generico ha effettuato il login.\\
-		\\
-		\textbf{Postcondizioni}&Vengono mostrati gli annunci compatibili con le keyword e i filtri inseriti dall'utente.\\
-		\\
-		\textbf{Processo}&Di seguito è descritto il processo:
-		\begin{enumerate}
-			\item L'utente generico accede alla pagina relativa alla ricerca di annunci di libri in vendita.
-			\item Il sistema mostra una pagina contenente una serie di campi (filtri) compilabili dall'utente per la ricerca degli annunci.
-			\item L'utente generico imposta i filtri sui risultati che intende ricevere. In particolare l'utente può usare i seguenti filtri:
-			\begin{itemize}
-				\item Corso per il quale un libro è consigliato: la ricerca del corso da selezionare viene facilitata tramite preventiva selezione del corso di laurea e dell'anno frequentato.
-				\item Titolo: può essere selezionato da una lista previa utilizzo del filtro precedente, oppure essere digitato manualmente dall'utente generico (non case-sensitive).
-				\item ISBN.
-				\item Prezzo: possono essere scelti un prezzo massimo e/o un prezzo minimo.
-				\item Voto medio del venditore: possono essere scelti un voto medio minimo e/o un voto medio massimo del venditore. Questo filtro non viene applicato a quei venditori che non hanno ancora ricevuto una recensione.
-				\item Condizione del libro: possono essere scelti una classe minima e/o una classe massima tra quelle introdotte nel requisito (\textit{RI1}).			
-			\end{itemize}
-			\item Il sistema ricerca tra gli annunci nel database i libri che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto al voto medio del venditore. In particolare per ogni risultato verranno mostrati titolo, foto, prezzo, condizione del libro e username del venditore, mentre la descrizione del libro viene omessa.
-			\item L'utente generico può scegliere il fattore da utilizzare per l'ordinamento dei risultati (per tutti i fattori è possibile la visualizzazione sia in ordine crescente che decrescente):
-			\begin{itemize}
-				\item Voto medio del venditore.
-				\item Data d'inserimento dell'annuncio.
-				\item Prezzo.
-				\item Condizioni del libro.
-			\end{itemize}
-			\item L'utente generico può accedere ad un qualsiasi annuncio per visionare eventuali foto aggiuntive e la descrizione testuale del libro.
-		\end{enumerate}
-	\end{tabular}
-
-	\subsection{UCG2: Ricerca studente}
-	\begin{tabular}{lp{0.8\textwidth}}
-		\textbf{Descrizione}&Un utente generico effettua la ricerca di uno studente che usufruisce del servizio.\\
-		\\
-		\textbf{Requisiti coperti}&U1\\
-		\\
-		\textbf{Attori coinvolti}&Utente generico\\
-		\\
-		\textbf{Precondizioni}&L'utente generico ha effettuato il login.\\
-		\\
-		\textbf{Postcondizioni}&Vengono mostrati gli studenti compatibili con le keyword e i filtri inseriti dall'utente.\\
-		\\
-		\textbf{Processo}&Di seguito è descritto il processo:
-		\begin{enumerate}
-			\item L'utente generico accede alla pagina relativa alla ricerca di studenti iscritti al servizio.
-			\item Il sistema mostra una serie di campi che possono essere compilati dallo studente per effettuare la ricerca:
-			\begin{itemize}
-				\item Corso di laurea ed anno di corso.
-				\item Username.
-				\item Nome e cognome.			
-			\end{itemize}
-			\item L'utente generico compila i campi desiderati (almeno uno) ed esegue il comando di ricerca.
-			\item Il sistema verifica che almeno uno dei campi sia stato compilato e sulla base del risultato del controllo si comporta in modo diverso:
-			\begin{itemize}
-				\item Se nessun campo è stato compilato, il sistema non esegue la ricerca e mostra un riquadro rosso con la scritta "Almeno un campo deve essere compilato per effettuare la ricerca".
-				\item Se almeno un campo è stato compilato, procede con la ricerca.
-			\end{itemize}
-			\item Il sistema ricerca tra gli studenti nel database coloro che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto alla somiglianza dello username con la keyword utilizzata per la ricerca. In particolare per ogni risultato vengono mostrati username, nome, cognome, corso di laurea, anno di corso e una foto profilo (se questa è assente viene visualizzata un'immagine di default).
-			\item L'utente generico può accedere ad un qualsiasi profilo studente per visionare in dettaglio le seguenti informazioni:
-			\begin{itemize}
-				\item Nome e cognome
-				\item Indirizzo email universitario
-				\item Eventuali contatti aggiuntivi quali numero di telefono, indirizzo email personale e pagina Facebook personale
-				\item Numero di libri venduti
-				\item Numero di libri acquistati
-				\item Voto medio delle recensioni ricevute
-				\item Recensioni ricevute in qualità di venditore
-				\item Recensioni ricevute in qualità di acquirente
-				\item Elenco dei libri in vendita
-			\end{itemize}
-		\end{enumerate}
-	\end{tabular}
-
-	\subsection{UCG3: Ricerca pagina titolo}
-	\begin{tabular}{lp{0.8\textwidth}}
-		\textbf{Descrizione}&Un utente generico effettua la ricerca della pagina relativa ad uno specifico titolo.\\
-		\\
-		\textbf{Requisiti coperti}&T1\\
-		\\
-		\textbf{Attori coinvolti}&Utente generico\\
-		\\
-		\textbf{Precondizioni}&L'utente generico ha effettuato il login.\\
-		\\
-		\textbf{Postcondizioni}&Vengono mostrati i titoli compatibili con le keyword e i filtri inseriti dall'utente.\\
-		\\
-		\textbf{Processo}&Di seguito è descritto il processo:
-		\begin{enumerate}
-			\item L'utente generico accede alla pagina relaiva alla ricerca delle pagine dei titoli presenti nel sistema.
-			\item Il sistema mostra una serie di campi che possono essere compilati dall'utente per effettuare la ricerca:
-			\begin{itemize}
-				\item Corso per il quale un libro è consigliato: la ricerca del corso da selezionare viene facilitata tramite preventiva selezione del corso di laurea e dell'anno frequentato.
-				\item Titolo: può essere selezionato da una lista previa utilizzo del filtro precedente, oppure essere digitato manualmente dall'utente generico (non case-sensitive).
-				\item ISBN.			
-			\end{itemize}
-			\item L'utente generico compila i campi (almeno uno) ed esegue il comando di ricerca.
-			\item Il sistema verifica che almeno un campo sia stato compilato e sulla base del risultato di questa verifica si comporta in modo diverso:
-			\begin{itemize}
-				\item Se nessun campo è stato compilato, il sistema non esegue la ricerca e mostra un riquadro rosso con la scritta "Almeno un campo deve essere compilato per effettuare la ricerca".
-				\item Se almeno un campo è stato compilato, procede con la ricerca.
-			\end{itemize}
-			\item Il sistema ricerca tra i titoli nel database quelli che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto alla somiglianza tra le keyword utilizzate e i titoli effettivi. In particolare per ogni risultato verranno mostrati titolo e foto (se questa è assente viene visualizzata un'immagine di default).
-			\item L'utente generico può accedere alla pagina relativa ad un qualsiasi titolo mostrato per visionare eventuali informazioni aggiuntive, quali una descrizione (facoltativa) realizzata da altri studenti, le recensioni del titolo effettuate da altri studenti e l'elenco dei corsi per i quali il titolo è consigliato.
-		\end{enumerate}
-	\end{tabular}
-
-	\subsection{UCG4: Ricerca corso}
-	\begin{tabular}{lp{0.8\textwidth}}
-		\textbf{Descrizione}&Un utente generico effettua la ricerca della pagina relativa ad uno specifico corso.\\
-		\\
-		\textbf{Requisiti coperti}&C1\\
-		\\
-		\textbf{Attori coinvolti}&Utente generico\\
-		\\
-		\textbf{Precondizioni}&L'utente generico ha effettuato il login.\\
-		\\
-		\textbf{Postcondizioni}&Vengono mostrati i corsi compatibili con le keyword e i filtri inseriti dall'utente.\\
-		\\
-		\textbf{Processo}&Di seguito è descritto il processo:
-		\begin{enumerate}
-			\item L'utente generico accede alla pagina relativa alla ricerca di corsi universitari.
-			\item Il sistema mostra una serie di campi che possono essere compilati dall'utente per la ricerca dei corsi:
-			\begin{itemize}
-				\item Corso di laurea e anno di corso.
-				\item Nome del corso: può essere selezionato da una lista previa utilizzo del filtro precedente, oppure essere digitato manualmente dall'utente generico (non case-sensitive).			
-			\end{itemize}
-			\item L'utente generico compila i campi (almeno uno) ed esegue il comando di ricerca.
-			\item Il sistema verifica che almeno un campo sia stato compilato e sulla base del risultato di questa verifica si comporta in modo diverso:
-			\begin{itemize}
-				\item Se nessun campo è stato compilato, il sistema non esegue la ricerca e mostra un riquadro rosso con la scritta "Almeno un campo deve essere compilato per effettuare la ricerca".
-				\item Se almeno un campo è stato compilato, procede con la ricerca.
-			\end{itemize}
-			\item Il sistema ricerca tra i corsi nel database quelli che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto alla somiglianza tra le keyword utilizzate e i titoli effettivi. In particolare per ogni risultato verranno mostrati il nome del corso e il link alla relativa pagina sul sito web dell'ateneo.
-			\item L'utente generico può accedere alla pagina relativa ad un qualsiasi corso mostrato per visionare i titoli consigliati per il corso.
-		\end{enumerate}
-	\end{tabular}
 
 	\subsection{UCA1: Registrazione nuovo amministratore}
 	\begin{tabular}{lp{0.8\textwidth}}
@@ -443,12 +283,12 @@
 		\textbf{Processo}&Di seguito è descritto il processo:
 		\begin{enumerate}
 			\item L'amministratore accede alla pagina per il login dedicata agli amministratori del sistema.
-			\item Il sistema visualizza due campi in cui inserire username e password.
-			\item L'amministratore inserisce username e password e richiede l'accesso.
-			\item Il sistema verifica che esista un amministratore registrato con lo username inserito e in caso affermativo verifica che la password inserita sia corretta.
+			\item Il sistema visualizza due campi in cui inserire indirizzo email e password.
+			\item L'amministratore inserisce indirizzo email e password e richiede l'accesso.
+			\item Il sistema verifica che esista un amministratore registrato con l'indirizzo email inserito e in caso affermativo verifica che la password inserita sia corretta.
 			\item In base al risultato della ricerca precedente il sistema si può comportare in due modi:
 			\begin{itemize}
-				\item Se nessun amministratore risulta registrato con tale username o la password è errata, il sistema mostra un riquadro rosso con la scritta "Username e/o password errati" ed impedisce l'accesso.
+				\item Se nessun amministratore risulta registrato con tale username o la password è errata, il sistema mostra un riquadro rosso con la scritta "Dati d'accesso errati" ed impedisce l'accesso.
 				\item Se i dati inseriti sono corretti, il sistema permette l'accesso all'amministratore ed apre la pagina personale dello stesso.
 			\end{itemize}
 		\end{enumerate}
@@ -476,49 +316,6 @@
 				\item Numero di segnalazioni gestite.
 				\item Numero di richieste d'assistenza gestite.
 				\item Data d'iscrizione al servizio.
-			\end{itemize}
-		\end{enumerate}
-	\end{tabular}
-	
-	\subsection{UCA4: Creazione pagina corso}
-	\begin{tabular}{lp{0.8\textwidth}}
-		\textbf{Descrizione}&Un amministratore vuole inserire un nuovo corso universitario nel database e crearne una pagina di presentazione.\\
-		\\
-		\textbf{Requisiti coperti}&C2\\
-		\\
-		\textbf{Attori coinvolti}&Amministratore\\
-		\\
-		\textbf{Precondizioni}&\begin{itemize}
-			\item Un determinato corso universitario è assente dal database.
-			\item L'amministratore ha effettuato l'accesso.
-		\end{itemize}\\
-		\\
-		\textbf{Postcondizioni}&Il corso universitario viene inserito nel database e la pagina relativa ad esso viene messa a disposizione di tutti gli utenti.\\
-		\\
-		\textbf{Processo}&Di seguito è descritto il processo:
-		\begin{enumerate}
-			\item L'amministratore accede alla pagina relativa alla creazione della pagina di un corso universitario.
-			\item Il sistema mostra i campi necessari per l'inserimento dei seguenti dati:
-			\begin{itemize}
-				\item Nome del corso universitario.
-				\item Link alla pagina web del corso.
-				\item Elenco dei corsi di laurea e degli anni di corso legati al corso universitario.
-			\end{itemize}
-			\item L'amministratore inserisce nei campi di cui sopra i dati necessari.
-			\item Il sistema verifica che i campi siano stati compilati in modo corretto:
-			\begin{itemize}
-				\item Tutti i campi devono essere compilati.
-				\item Il link alla pagina del corso deve essere formattato correttamente (www.dominioprivato.dominio\_primo\_livello).
-			\end{itemize}
-			\item Sulla base del risultato della verifica precedente, il sistema si comporta in modo diverso:
-			\begin{itemize}
-				\item Se i campi sono stati compilati correttamente, il sistema procede con il passo successivo del processo.
-				\item Se i campi non sono stati compilati correttamente, il sistema interrompe il processo di creazione della pagina e mostra un riquadro rosso con la scritta "Campi compilati in modo errato".
-			\end{itemize}
-			\item Il sistema verifica che nel database non sia presente alcun corso universitario avente lo stesso nome e in base al risultato del test si comporta in due modi diversi:
-			\begin{itemize}
-				\item Se nel database è già presente un corso avente lo stesso nome, il sistema mostra un riquadro rosso con la scritta "Il nome del corso è già stato utilizzato" e non effettua l'inserimento del corso nel database.
-				\item Se nel database non è presente alcun corso universitario avente lo stesso nome, il sistema inserisce i dati forniti nel database.
 			\end{itemize}
 		\end{enumerate}
 	\end{tabular}
@@ -694,11 +491,10 @@
 				\item Se nessuno studente risulta registrato con tale username o la password è errata, il sistema mostra un riquadro rosso con la scritta "Username e/o password errati" ed impedisce l'accesso.
 				\item Se i dati inseriti sono corretti, il sistema permette l'accesso allo studente e verifica se lo studente è sospeso dal servizio per numero eccessivo di segnalazioni ricevute:
 				\begin{itemize}
-					\item Se lo studente risulta sospeso, gli viene permessa la sola visualizzazione di una pagina che lo informa del numero di giorni rimanenti prima del termine della sospensione.
+					\item Se lo studente risulta sospeso, gli viene permessa la sola visualizzazione di una pagina che lo informa del suo status.
 					\item Se lo studente non risulta sospeso, viene aperta la homepage del sito, la quale sulla base dei dati relativi allo specifico studente deve mostrare i seguenti contenuti:
 					\begin{itemize}
 						\item Annunci presenti nella "wishlist" di studenti simili (per corso di laurea, anno di corso, ricerche effettuate, wishlist e titoli d'interesse).
-						\item Annunci legati a ricerche effettuate dallo studente negli ultimi 7 giorni.
 						\item Annunci presenti nella "wishlist" o legati a titoli presenti nella lista "Titoli d'interesse" dello studente.
 					\end{itemize}
 				\end{itemize}
@@ -910,7 +706,117 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsection{UCS11: Inserimento annuncio libro in vendita}
+	\subsection{UCS11: Ricerca annuncio}
+	\begin{tabular}{lp{0.8\textwidth}}
+		\textbf{Descrizione}&Uno studente effettua la ricerca di un libro tra gli annunci pubblicati.\\
+		\\
+		\textbf{Requisiti coperti}&RI1\\
+		\\
+		\textbf{Attori coinvolti}&Studente\\
+		\\
+		\textbf{Precondizioni}&Lo studente ha effettuato il login.\\
+		\\
+		\textbf{Postcondizioni}&Vengono mostrati gli annunci compatibili con le keyword e i filtri inseriti dall'utente.\\
+		\\
+		\textbf{Processo}&Di seguito è descritto il processo:
+		\begin{enumerate}
+			\item Lo studente accede alla pagina relativa alla ricerca di annunci di libri in vendita.
+			\item Il sistema mostra una pagina contenente una serie di campi (filtri) compilabili dall'utente per la ricerca degli annunci.
+			\item Lo studente imposta i filtri sui risultati che intende ricevere. In particolare l'utente può usare i seguenti filtri:
+			\begin{itemize}
+				\item Titolo: può essere selezionato da una lista previa utilizzo del filtro precedente, oppure essere digitato manualmente dall'utente generico (non case-sensitive).
+				\item ISBN.
+				\item Prezzo: possono essere scelti un prezzo massimo e/o un prezzo minimo.
+				\item Voto medio del venditore: possono essere scelti un voto medio minimo e/o un voto medio massimo del venditore. Questo filtro non viene applicato a quei venditori che non hanno ancora ricevuto una recensione.
+				\item Condizione del libro: possono essere scelti una classe minima e/o una classe massima tra quelle introdotte nel requisito (\textit{RI1}).			
+			\end{itemize}
+			\item Il sistema ricerca tra gli annunci nel database i libri che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto al voto medio del venditore. In particolare per ogni risultato verranno mostrati titolo, foto, prezzo, condizione del libro e username del venditore, mentre la descrizione del libro viene omessa.
+			\item Lo studente può scegliere il fattore da utilizzare per l'ordinamento dei risultati (per tutti i fattori è possibile la visualizzazione sia in ordine crescente che decrescente):
+			\begin{itemize}
+				\item Voto medio del venditore.
+				\item Data d'inserimento dell'annuncio.
+				\item Prezzo.
+				\item Condizioni del libro.
+			\end{itemize}
+			\item Lo studente può accedere ad un qualsiasi annuncio per visionare eventuali foto aggiuntive e la descrizione testuale del libro.
+		\end{enumerate}
+	\end{tabular}
+	
+	\subsection{UCS12: Ricerca studente}
+	\begin{tabular}{lp{0.8\textwidth}}
+		\textbf{Descrizione}&Un utente effettua la ricerca di uno studente che usufruisce del servizio.\\
+		\\
+		\textbf{Requisiti coperti}&U1\\
+		\\
+		\textbf{Attori coinvolti}&Studente\\
+		\\
+		\textbf{Precondizioni}&Lo studente ha effettuato il login.\\
+		\\
+		\textbf{Postcondizioni}&Vengono mostrati gli studenti compatibili con le keyword e i filtri inseriti dall'utente.\\
+		\\
+		\textbf{Processo}&Di seguito è descritto il processo:
+		\begin{enumerate}
+			\item Lo studente accede alla pagina relativa alla ricerca di studenti iscritti al servizio.
+			\item Il sistema mostra una serie di campi che possono essere compilati dallo studente per effettuare la ricerca:
+			\begin{itemize}
+				\item Corso di laurea ed anno di corso.
+				\item Username.
+				\item Nome e cognome.			
+			\end{itemize}
+			\item Lo studente compila i campi desiderati (almeno uno) ed esegue il comando di ricerca.
+			\item Il sistema verifica che almeno uno dei campi sia stato compilato e sulla base del risultato del controllo si comporta in modo diverso:
+			\begin{itemize}
+				\item Se nessun campo è stato compilato, il sistema non esegue la ricerca e mostra un riquadro rosso con la scritta "Almeno un campo deve essere compilato per effettuare la ricerca".
+				\item Se almeno un campo è stato compilato, procede con la ricerca.
+			\end{itemize}
+			\item Il sistema ricerca tra gli studenti nel database coloro che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto alla somiglianza dello username con la keyword utilizzata per la ricerca. In particolare per ogni risultato vengono mostrati username, nome, cognome, corso di laurea, anno di corso e una foto profilo (se questa è assente viene visualizzata un'immagine di default).
+			\item Lo studente può accedere ad un qualsiasi profilo studente per visionare in dettaglio le seguenti informazioni:
+			\begin{itemize}
+				\item Nome e cognome
+				\item Indirizzo email universitario
+				\item Eventuali contatti aggiuntivi quali numero di telefono, indirizzo email personale e pagina Facebook personale
+				\item Numero di libri venduti
+				\item Numero di libri acquistati
+				\item Voto medio delle recensioni ricevute
+				\item Recensioni ricevute in qualità di venditore
+				\item Recensioni ricevute in qualità di acquirente
+				\item Elenco dei libri in vendita
+			\end{itemize}
+		\end{enumerate}
+	\end{tabular}
+	
+	\subsection{UCS13: Ricerca pagina titolo}
+	\begin{tabular}{lp{0.8\textwidth}}
+		\textbf{Descrizione}&Uno studente effettua la ricerca della pagina relativa ad uno specifico titolo.\\
+		\\
+		\textbf{Requisiti coperti}&T1\\
+		\\
+		\textbf{Attori coinvolti}&Studente\\
+		\\
+		\textbf{Precondizioni}&Lo studente ha effettuato il login.\\
+		\\
+		\textbf{Postcondizioni}&Vengono mostrati i titoli compatibili con le keyword e i filtri inseriti dall'utente.\\
+		\\
+		\textbf{Processo}&Di seguito è descritto il processo:
+		\begin{enumerate}
+			\item Lo studente accede alla pagina relativa alla ricerca delle pagine dei titoli presenti nel sistema.
+			\item Il sistema mostra una serie di campi che possono essere compilati dall'utente per effettuare la ricerca:
+			\begin{itemize}
+				\item Titolo: può essere selezionato da una lista previa utilizzo del filtro precedente, oppure essere digitato manualmente dall'utente generico (non case-sensitive).
+				\item ISBN.			
+			\end{itemize}
+			\item Lo studente compila i campi (almeno uno) ed esegue il comando di ricerca.
+			\item Il sistema verifica che almeno un campo sia stato compilato e sulla base del risultato di questa verifica si comporta in modo diverso:
+			\begin{itemize}
+				\item Se nessun campo è stato compilato, il sistema non esegue la ricerca e mostra un riquadro rosso con la scritta "Almeno un campo deve essere compilato per effettuare la ricerca".
+				\item Se almeno un campo è stato compilato, procede con la ricerca.
+			\end{itemize}
+			\item Il sistema ricerca tra i titoli nel database quelli che risultano coerenti con i filtri imposti e mostra i risultati in ordine decrescente rispetto alla somiglianza tra le keyword utilizzate e i titoli effettivi. In particolare per ogni risultato verranno mostrati titolo e foto (se questa è assente viene visualizzata un'immagine di default).
+			\item Lo studente può accedere alla pagina relativa ad un qualsiasi titolo mostrato per visionare eventuali informazioni aggiuntive, quali una descrizione (facoltativa) realizzata da altri studenti, le recensioni del titolo effettuate da altri studenti e l'elenco dei corsi per i quali il titolo è consigliato.
+		\end{enumerate}
+	\end{tabular}
+
+	\subsection{UCS14: Inserimento annuncio libro in vendita}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di venditore vuole pubblicare un annuncio per la vendita di un libro.\\
 		\\
@@ -929,7 +835,7 @@
 			\begin{itemize}
 				\item Titolo: selezionabile da una lista dei titoli già presenti nel sistema. Se il titolo risulta assente da tale lista, la sua aggiunta è a carico del venditore (caso d'uso \textit{UCS12}).
 				\item Autore/i: campo compilato automaticamente dopo la scelta del titolo.
-				\item ISBN: selezionabile da una lista di ISBN legati al titolo selezionato. Se l'ISBN è assente, il sistema chiede al venditore di aggiungerlo a tale lista.
+				\item ISBN.
 				\item Prezzo di vendita.
 				\item Descrizione del libro.
 				\item Condizioni del libro: selezione di una classe tra quelle descritte nel requisito \textit{I1}.
@@ -949,7 +855,7 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsection{UCS12: Inserimento nuovo titolo}
+	\subsection{UCS15: Inserimento nuovo titolo}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di venditore vuole inserire un nuovo titolo nel database del sistema.\\
 		\\
@@ -967,7 +873,7 @@
 			\item Il sistema mostra una pagina contenente un elenco di campi che devono essere compilati:
 			\begin{itemize}
 				\item Titolo: nome del libro.
-				\item Autori: deve esserne citato almeno uno, il numero massimo di autori inseribili è invece 5.
+				\item Autori.
 				\item ISBN.
 				\item Corso per il quale il libro è consigliato: selezionabile da una lista di corsi universitari.
 			\end{itemize}
@@ -986,7 +892,7 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsection{UCS13: Modifica annuncio libro in vendita}
+	\subsection{UCS16: Modifica annuncio libro in vendita}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di venditore vuole modificare un annuncio da lui stesso pubblicato in passato.\\
 		\\
@@ -1009,7 +915,7 @@
 			\begin{itemize}
 				\item Titolo: selezionabile da una lista dei titoli già presenti nel sistema. Se il titolo risulta assente da tale lista, la sua aggiunta è a carico del venditore (caso d'uso \textit{UCS12}).
 				\item Autore/i: campo compilato automaticamente dopo la scelta del titolo.
-				\item ISBN: selezionabile da una lista di ISBN legati al titolo selezionato. Se l'ISBN è assente, il sistema chiede al venditore di aggiungerlo a tale lista.
+				\item ISBN.
 				\item Prezzo di vendita.
 				\item Descrizione del libro.
 				\item Condizioni del libro: selezione di una classe tra quelle descritte nel requisito \textit{I1}.
@@ -1036,7 +942,7 @@
 	\end{tabular}
 	
 
-	\subsection{UCS14: Notifica avvenuta vendita libro}
+	\subsection{UCS17: Notifica avvenuta vendita libro}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di venditore vuole notificare al sistema l'avvenuta vendita di un libro.\\
 		\\
@@ -1076,8 +982,8 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsection{UCS15: Recensione studente}
-	\subsubsection{UCS15.1: Recensione acquirente}
+	\subsection{UCS18: Recensione studente}
+	\subsubsection{UCS18.1: Recensione acquirente}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di venditore vuole recensire l'acquirente di un proprio libro precedentemente in vendita.\\
 		\\
@@ -1120,7 +1026,7 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsubsection{UCS15.2: Recensione venditore}
+	\subsubsection{UCS18.2: Recensione venditore}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di acquirente vuole recensire il venditore di un libro precedentemente acquistato.\\
 		\\
@@ -1163,7 +1069,7 @@
 		\end{enumerate}
 	\end{tabular}
 
-	\subsection{UCS16: Conferma acquisto libro}
+	\subsection{UCS19: Conferma acquisto libro}
 	\begin{tabular}{lp{0.8\textwidth}}
 		\textbf{Descrizione}&Uno studente nel ruolo di acquirente vuole recensire il venditore di un libro precedentemente acquistato.\\
 		\\
@@ -1217,7 +1123,7 @@
 		\item Tipologia di applicazione: applicazione web, in modo da garantire un accesso semplice da qualsiasi tipo di dispositivo.
 		\item Linguaggio di programmazione per l'applicazione back-end: Python 3 - framework Django 2.1, framework moderno che offre numerosi servizi di default, linguaggio ordinato e di facile lettura.
 		\item Front-end: framework Bootstrap 4, per garantire una visualizzazione ottimale su dispositivi di dimensioni diverse.
-		\item DBMS: PostgreSQL, indicato come particolarmente adatto per applicazioni che richiedono l'utilizzo di algoritmi di ricerca fuzzy.
+		\item DBMS: PostgreSQL, indicato come particolarmente adatto per applicazioni che richiedono l'utilizzo di algoritmi di ricerca fuzzy. N.B. L'implementazione reale del progetto utilizzerà SQLite, in quanto le funzionalità che verranno realmente implementate non richiedono DBMS particolari.
 		\item L'applicazione lavorerà in uno spazio messo a disposizione gratuitamente dal PaaS PythonAnywhere, specializzato nell'esecuzione di applicazioni Python.
 	\end{itemize}
 
@@ -1226,7 +1132,7 @@
 	\begin{itemize}
 		\item TexStudio: realizzazione della documentazione.
 		\item LucidChart: realizzazione di schemi in linguaggio UML.
-		\item PyDev: IDE basato su Eclipse utilizzato per la codifica dell'applicazione.
+		\item PyCharm: IDE specifico per la programmazione in Python.
 		\item Github: versioning dell'applicazione.
 	\end{itemize}
 
