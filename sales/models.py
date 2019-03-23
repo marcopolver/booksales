@@ -89,7 +89,7 @@ class Title(models.Model):
 
 class BookAd(models.Model):
     title_isbn = models.ForeignKey(Title, on_delete=models.CASCADE, related_name='annunci_titolo')
-    seller_id = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='annunci_studente')
+    seller = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='annunci_studente')
     description = models.TextField(max_length=500)
     content_id = models.OneToOneField(Content, on_delete=models.CASCADE, related_name='annunci_content')
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -103,14 +103,23 @@ class BookAd(models.Model):
     quality_class = models.CharField(max_length=1, choices=CLASSES)
     publication_datetime = models.DateTimeField(auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True)
-    buyer_id = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, related_name='acquisti')
-    purchase_confirmation = models.BooleanField(null=True)
-    #TODO: ImageField, una foto del libro è necessaria
-    #TODO: Modifica -> i dati relativi all'acquisto non vanno in BookAd ma in un nuovo model Transaction
+    #purchase_confirmation = models.BooleanField(null=True)
+    #photo = models.ImageField(upload_to='books_photos', height_field=100, width_field=100, default='default-user.png')
+    #TODO: Modifica -> immagine problematica
 
     #NB: Ritorna titolo, non è univoco
     def __str__(self):
         return str(self.title_isbn)
+
+class Transaction(models.Model):
+    seller = models.OneToOneField(Student, on_delete=models.SET_NULL, related_name='vendite', null=True)
+    buyer = models.OneToOneField(Student, on_delete=models.SET_NULL, related_name='acquisti', null=True)
+    title = models.OneToOneField(Title, on_delete=models.SET_NULL, related_name='vendite_titolo', null=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    transaction_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    def __str__(self):
+        return str(self.seller) + ' -> ' + str(self.buyer) + ': ' + str(self.title)
 
 class Wishlist(models.Model):
 

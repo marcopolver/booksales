@@ -1,6 +1,7 @@
 from django.test import TestCase
 from sales import models
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -34,7 +35,8 @@ class ModelsTest(TestCase):
         t = models.Title.objects.create(isbn='34647458749', name='Funaioli', description='Ingegneria dei sistemi meccanici', content_id=c)
         c2 = models.Content.objects.create(content_type='ba')
         s = models.Student.objects.create(username='john', email='lennon@thebeatles.com', password='johnpassword')
-        ba = models.BookAd.objects.create(title_isbn=t, content_id=c2, seller_id=s, description='Libro in vendita')
+
+        ba = models.BookAd.objects.create(title_isbn=t, content_id=c2, seller=s, description='Libro in vendita')
         self.assertTrue(isinstance(ba, models.BookAd))
         self.assertEqual(str(ba), str(ba.title_isbn))
 
@@ -44,7 +46,7 @@ class ModelsTest(TestCase):
         t = models.Title.objects.create(isbn='34647458749', name='Funaioli', description='Ingegneria dei sistemi meccanici', content_id=c)
         c2 = models.Content.objects.create(content_type='ba')
         s = models.Student.objects.create(username='john', email='lennon@thebeatles.com', password='johnpassword')
-        ba = models.BookAd.objects.create(title_isbn=t, content_id=c2, seller_id=s, description='Libro in vendita')
+        ba = models.BookAd.objects.create(title_isbn=t, content_id=c2, seller=s, description='Libro in vendita')
 
         w = models.Wishlist(ad_id=ba, user_id=u)
         self.assertTrue(isinstance(w, models.Wishlist))
