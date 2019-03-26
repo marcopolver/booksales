@@ -33,3 +33,5 @@
 \contentsline {section}{\numberline {0.3}Class diagram}{36}
 \contentsline {section}{\numberline {0.4}Scelte progettuali}{36}
 \contentsline {section}{\numberline {0.5}Toolchain}{37}
+\contentsline {section}{\numberline {0.6}Algoritmo: il clustering}{37}
+\contentsline {subsection}{\numberline {0.6.1}K-means clustering}{37}
