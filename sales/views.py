@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 #View relativa ad homepage
 def home(request):
-    return render(request, 'home_page.html')
+    return render(request, 'home.html')

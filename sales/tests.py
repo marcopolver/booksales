@@ -10,7 +10,7 @@ class HomeViewTest(TestCase):
 
     def test_template(self):
         response = self.client.get('/')
-        self.assertTemplateUsed(response, 'home_page.html')
+        self.assertTemplateUsed(response, 'home.html')
 
 class ModelsTest(TestCase):
 
