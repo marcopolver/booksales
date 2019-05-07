@@ -1,19 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
-class Student(AbstractUser):
-    username = models.CharField(max_length=16, unique=True)
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    #username = models.CharField(max_length=16, unique=True)
     #password = forms.CharField(widget=forms.PasswordInput)
-    #name = models.CharField(max_length=20)
-    #surname = models.CharField(max_length=20)
-    registration_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
-    last_login_datetime = models.DateTimeField(auto_now=True, auto_now_add=False)
+    name = models.CharField(max_length=20)
+    surname = models.CharField(max_length=20)
+    #registration_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
+    #last_login_datetime = models.DateTimeField(auto_now=True, auto_now_add=False)
     #university_email = models.EmailField(max_length=254, unique=True)
-    telephone_number = models.CharField(max_length=16)
-    personal_email = models.EmailField(max_length=254)
-    facebook_page = models.URLField(max_length=200)
+    telephone_number = models.CharField(max_length=16, null=True, blank=True)
+    personal_email = models.EmailField(max_length=254, null=True, blank=True)
+    facebook_page = models.URLField(max_length=200, null=True, blank=True)
 
     MAJORS_NAMES = (
         ('ING_INF_T', 'Ingegneria informatica triennale'),
@@ -31,14 +32,14 @@ class Student(AbstractUser):
     bought_books_number = models.IntegerField(default=0)
     reports_number = models.IntegerField(default=0)
 
-    USERNAME_FIELD = 'username'
+    #USERNAME_FIELD = 'username'
 
     #EMAIL_FIELD = 'university_email'
 
     #REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
-        return self.email
+        return str(self.user)
 
 #class Moderator(GenericUser):
 #    personal_email = models.EmailField(max_length=254, unique=True)
@@ -66,8 +67,8 @@ class Title(models.Model):
     name = models.CharField(max_length=10)
     cover_image = models.ImageField(upload_to='images/title_covers', height_field=None, width_field=None, max_length=100)
     description = models.TextField(max_length=500)
-    content_id = models.OneToOneField(Content, on_delete=models.CASCADE, related_name='titoli_content')
-    description_user_id = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, related_name='descrizioni')
+    content = models.OneToOneField(Content, on_delete=models.CASCADE, related_name='titoli_content')
+    description_user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='descrizioni')
     creation_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
     last_edit_datetime = models.DateTimeField(auto_now=True, auto_now_add=False)
 
@@ -89,9 +90,9 @@ class Title(models.Model):
 
 class BookAd(models.Model):
     title_isbn = models.ForeignKey(Title, on_delete=models.CASCADE, related_name='annunci_titolo')
-    seller = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='annunci_studente')
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='annunci_studente')
     description = models.TextField(max_length=500)
-    content_id = models.OneToOneField(Content, on_delete=models.CASCADE, related_name='annunci_content')
+    content = models.OneToOneField(Content, on_delete=models.CASCADE, related_name='annunci_content')
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
     CLASSES = (
@@ -112,8 +113,8 @@ class BookAd(models.Model):
         return str(self.title_isbn)
 
 class Transaction(models.Model):
-    seller = models.OneToOneField(Student, on_delete=models.SET_NULL, related_name='vendite', null=True)
-    buyer = models.OneToOneField(Student, on_delete=models.SET_NULL, related_name='acquisti', null=True)
+    seller = models.OneToOneField(User, on_delete=models.SET_NULL, related_name='vendite', null=True)
+    buyer = models.OneToOneField(User, on_delete=models.SET_NULL, related_name='acquisti', null=True)
     title = models.OneToOneField(Title, on_delete=models.SET_NULL, related_name='vendite_titolo', null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     transaction_datetime = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -124,7 +125,7 @@ class Transaction(models.Model):
 class Wishlist(models.Model):
 
     ad_id = models.ForeignKey(BookAd, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='wishlist_books')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlist_books')
 
     class Meta:
         unique_together = (("ad_id", "user_id"),)
@@ -133,9 +134,18 @@ class Wishlist(models.Model):
 class InterestingTitle(models.Model):
 
     title_isbn = models.ForeignKey(Title, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='interesting_titles')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='interesting_titles')
 
     class Meta:
         unique_together = (("title_isbn", "user_id"),)
+
+class Cluster(models.Model):
+
+    student = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cluster')
+    cluster_number = models.IntegerField(null=True)
+
+class ClusteringInfo(models.Model):
+    run_time = models.DateTimeField()
+    num_clusters = models.IntegerField()
 
 

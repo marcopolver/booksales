@@ -1,12 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Student
+from django.contrib.auth.models import User
+from .models import StudentProfile
 
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
-        model = Student
-        fields = ('username', 'email', 'first_name', 'last_name', 'major')
+        model = User
+        fields = ['username', 'email']
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -18,5 +19,10 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
-        model = Student
-        fields = ('username', 'email')
+        model = User
+        fields = ['username', 'email']
+
+class StudentProfileForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['name', 'surname', 'major']
