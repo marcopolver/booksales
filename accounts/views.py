@@ -138,7 +138,62 @@ def first_page(request, username):
 
     #Elbow k-means
     else:
+        #Students objects
+        students = models.StudentProfile.objects.all()
 
+        #Students' favourite subjects list
+        students_matrix = []
+
+        #For each student, we create a numpy array that contains the values referred to the different subjects
+        for s in students:
+            #Extraction of interesting titles and wishlist books
+            s_int_titles = s.user.interesting_titles.all()
+            s_wishes = s.user.wishlist_books.all()
+
+            #Numpy array for the subject values
+            s_values = [0,0,0,0,0,0,0,0]
+
+            #Values update due to interesting titles
+            for i in s_int_titles:
+                if i.title_isbn.category is 'FIS':
+                    s_values[0] += 5
+                elif i.title_isbn.category is 'MAT':
+                    s_values[1] += 5
+                elif i.title_isbn.category is 'INF':
+                    s_values[2] += 5
+                elif i.title_isbn.category is 'MEC':
+                    s_values[3] += 5
+                elif i.title_isbn.category is 'EN':
+                    s_values[4] += 5
+                elif i.title_isbn.category is 'ECO':
+                    s_values[5] += 5
+                elif i.title_isbn.category is 'AUT':
+                    s_values[6] += 5
+                elif i.title_isbn.category is 'STA':
+                    s_values[7] += 5
+
+            #Values update due to wishlist books
+            for w in s_wishes:
+                if w.ad_id.title_isbn.category is 'FIS':
+                    s_values[0] += 2
+                elif w.ad_id.title_isbn.category is 'MAT':
+                    s_values[1] += 2
+                elif w.ad_id.title_isbn.category is 'INF':
+                    s_values[2] += 2
+                elif w.ad_id.title_isbn.category is 'MEC':
+                    s_values[3] += 2
+                elif w.ad_id.title_isbn.category is 'EN':
+                    s_values[4] += 2
+                elif w.ad_id.title_isbn.category is 'ECO':
+                    s_values[5] += 2
+                elif w.ad_id.title_isbn.category is 'AUT':
+                    s_values[6] += 2
+                elif w.ad_id.title_isbn.category is 'STA':
+                    s_values[7] += 2
+
+            students_matrix.append(s_values)
+
+        s_values = np.array(s_values, dtype=float)
         elbow_kmeans()
 
 
